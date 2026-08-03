@@ -1,6 +1,8 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 
+set -euo pipefail
+
 brew bundle --file=/dev/stdin <<EOF
 brew "awscli"
 brew "fzf"
@@ -12,8 +14,9 @@ brew "openjdk"
 brew "python"
 
 cask "claude-code"
+{{ if or (eq .machineType "personal") (eq .machineType "work") }}
 cask "opensuperwhisper"
-cask "wezterm"
+cask "wezterm"{{ end }}
 EOF
 {{ end -}}
 

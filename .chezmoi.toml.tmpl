@@ -1,0 +1,9 @@
+{{/*
+  This file is special to chezmoi: `chezmoi init` renders it once and writes the result to ~/.config/chezmoi/chezmoi.toml. That config file is where the answer to the prompt below is cached, so you're only asked on first `chezmoi init` on a given machine (or after deleting the config).
+
+  Everything under [data] here becomes available to every template.
+*/}}
+{{- $machineType := promptChoiceOnce . "machineType" "Machine type" (list "personal" "work" "ai") "personal" -}}
+
+[data]
+    machineType = {{ $machineType | quote }}
